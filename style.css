@@ -1,0 +1,31 @@
+body { margin:0; padding:0; }
+#map { 
+  position:absolute;
+  top:0;
+  bottom:0; 
+  width:100%; }
+#map { 
+  width:45%;
+}
+#snapshot {
+  position:absolute;
+  top:0;bottom:0;right:0;
+  width:45%;
+}
+.controls{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:45%;
+  width:10%;
+  font-size:25px;
+}
+.textbox{
+  height:30px;
+  font-size:20px;
+  width:50%;
+}
+.btn{
+  height: 30px;
+  font-size:20px;
+}

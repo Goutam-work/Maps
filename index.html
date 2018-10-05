@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OpenMapTiles in Leaflet</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="leaflet/leaflet.css" />
+	<script src="leaflet/leaflet.js"></script>
+	<link href='style.css' rel='stylesheet' />
+
+</head>
+<body>
+  <div id='map'></div>
+  <div class="controls">
+    latitude:
+    <input type="text" id="latitude" class="textbox" value = "40.68818">
+    longitude:
+    <input type="text" id="longitude" class="textbox" value = "-74.01563">
+    <hr>
+    <button class="btn" id="plot">plot</button>
+    <button class="btn" id="image">Image</button>
+  </div>
+  <div id='snapshot'></div>
+  <script src='leaflet/leaflet-image.js'></script>
+  <script>
+  var snapshot = document.getElementById('snapshot');
+  var center = [];
+  center[0] = document.getElementById("latitude").value;
+  center[1] = document.getElementById("longitude").value;
+
+var map = L.map('map').setView(center,10);
+  L.tileLayer(
+    'http://192.168.99.100:32768/styles/osm-bright/{z}/{x}/{y}.png', {
+      maxZoom: 25
+    }).addTo(map);
+  //leafletImage(map, doImage);
+
+function doImage(err, canvas) {
+    var img = document.createElement('img');
+    var dimensions = map.getSize();
+    img.width = dimensions.x;
+    img.height = dimensions.y;
+    img.src = canvas.toDataURL();
+    snapshot.innerHTML = '';
+    snapshot.appendChild(img);
+  }
+  function addMarker(){
+    L.marker(center).addTo(map);
+  }
+  document.getElementById("plot").addEventListener("click", function(){
+    center[0] = document.getElementById("latitude").value;
+    center[1] = document.getElementById("longitude").value;
+    addMarker();
+  });
+  document.getElementById("image").addEventListener("click", function(){
+    leafletImage(map, doImage);
+  });
+  </script>
+  </body>
+</html>
